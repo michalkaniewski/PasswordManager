@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+
+  flask:
+    build: ./flask
+    container_name: flask
+    restart: always
+    links:
+      - mysql
+    env_file: ./flask/.env
+    expose:
+      - 8080
+  mysql:
+    image: mysql:8.0.21
+    command: --default-authentication-plugin=caching_sha2_password
+    container_name: mysql
+    ports:
+      - "32000:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - ./mysql:/docker-entrypoint-initdb.d/:ro
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - "443:443"
+    volumes: 
+     - ./nginx/data/certs:/etc/nginx/certs

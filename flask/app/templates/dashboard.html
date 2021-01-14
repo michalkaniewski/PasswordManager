@@ -1,0 +1,38 @@
+<head>
+    <script type="text/javascript" src="../static/scripts/dashboard.js"></script>
+</head>
+<header>
+    <nav>
+        <a href="/login">Zaloguj</a>
+        <a href="/dashboard">Moje hasła</a>
+        <a href="/logout">Wyloguj</a>
+        <a href="/register">Zarejestruj</a>
+    </nav>
+</header>
+<form action="/password" method="POST">
+    <label for="service">Nazwa serwisu:</label>
+    <input type="text" id="service" name="service" required>
+    <label for="password">Hasło:</label>
+    <input type="password" id="password" name="password" maxlength="64" title="Maksymalnie 64 znaki" required>
+    <label for="repassword">Powtórne hasło:</label>
+    <input type="password" id="repassword" name="repassword" required>
+    <label for="masterpassword">Klucz do odszyfrowania hasła:</label>
+    <input type="password" id="masterpassword" name="masterpassword"
+        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,}$"
+        title="co najmniej 8 znaków, w tym: wielka litera, mała litera, cyfra, znak specjalny" required>
+    <label for="remasterpassword">Powtórny klucz:</label>
+    <input type="password" id="remasterpassword" name="remasterpassword" required>
+    <input type="submit">
+</form>
+<section>
+    <ul id="passwords-list">
+        {% for item in data %}
+            <li id="{{item.id}}">
+                {{item.service}}
+                <input id="master-key" placeholder="klucz do odblokowania hasła" type="password">
+                <button>Pokaż hasło</button>
+                <input id="password" disabled>
+            </li>
+        {% endfor %}
+    </ul>
+</section>

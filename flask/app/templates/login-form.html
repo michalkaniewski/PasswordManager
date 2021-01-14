@@ -1,0 +1,15 @@
+<header>
+    <nav>
+        <a href="/login">Zaloguj</a>
+        <a href="/dashboard">Moje hasła</a>
+        <a href="/logout">Wyloguj</a>
+        <a href="/register">Zarejestruj</a>
+    </nav>
+</header>
+<form action="/login" method="POST">
+    <label for="username">Nazwa użytkownika:</label>
+    <input type="text" id="username" name="username" required>
+    <label for="password">Hasło:</label>
+    <input type="password" id="password" name="password" required>
+    <input type="submit">
+</form>
