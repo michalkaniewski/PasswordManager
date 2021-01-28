@@ -153,7 +153,7 @@ def add_password():
         response.headers['location'] = "/dashboard"
         return response
     if not (re.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,}$").match(mast_key)
-    and password.length <= 64):
+    and len(password) <= 64):
         response = make_response("Invalid data", 302)
         response.headers['location'] = "/dashboard"
         return response
